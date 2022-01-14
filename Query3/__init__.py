@@ -39,7 +39,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
             rows = cursor.fetchall()
             for row in rows:
-                dataString += f"{row[0]}\n"
+                dataString += f"Genre: {row[1]} -  Avg rating: {row[0]}\n"
 
 
     except:
