@@ -12,6 +12,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     password = os.environ["TPBDD_PASSWORD"]
     driver= '{ODBC Driver 17 for SQL Server}'
 
+    return func.HttpResponse("All is good", status_code=200)
+
     if len(server)==0 or len(database)==0 or len(username)==0 or len(password)==0:
         return func.HttpResponse("Au moins une des variables d'environnement n'a pas été initialisée.", status_code=500)
 
