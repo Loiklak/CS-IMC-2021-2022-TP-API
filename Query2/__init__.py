@@ -6,8 +6,6 @@ import azure.functions as func
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
-    return func.HttpResponse("All is good")
-
     server = os.environ["TPBDD_SERVER"]
     database = os.environ["TPBDD_DB"]
     username = os.environ["TPBDD_USERNAME"]
