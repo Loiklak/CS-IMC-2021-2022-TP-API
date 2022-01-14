@@ -24,7 +24,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         graph = Graph(neo4j_server, auth=(neo4j_user, neo4j_password))
         genres = graph.run("MATCH (t:Title)-[:IS_OF_GENRE]->(g:Genre) return stDevP(t.averageRating), g.genre")
         for genre in genres:
-            dataString += f"Genre: {genre}\n"
+            dataString += f"Genre: {genre['g.genre']} - Rating standard deviation: {genre['stDevP(t.averageRating)']}\n"
 
     except:
         errorMessage = "Erreur de connexion a la base Neo4j"
