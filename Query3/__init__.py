@@ -29,17 +29,16 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         with pyodbc.connect('DRIVER='+driver+';SERVER=tcp:'+server+';PORT=1433;DATABASE='+database+';UID='+username+';PWD='+ password) as conn:
             cursor = conn.cursor()
             cursor.execute("""
-                SELECT AVG(averageRating), genre
+                SELECT genre, STDEV(runtimeMinutes), AVG(runtimeMinutes)
                 FROM [dbo].[tGenres] genres
                 LEFT JOIN [dbo].[tTitles] titles
-                ON genres.tconst = titles.tconst
+                ON titles.tconst = genres.tconst
                 GROUP BY genre
-                HAVING genre IS NOT NULL
             """)
 
             rows = cursor.fetchall()
             for row in rows:
-                dataString += f"Genre: {row[1]} -  Avg rating: {row[0]}\n"
+                dataString += f"Genre: {row[0]} - Standard deviation in duration: {row[1]} - Average duration: {row[2]}\n"
 
 
     except:
